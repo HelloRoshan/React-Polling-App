@@ -1,0 +1,26 @@
+{
+  "name": "polling-application",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app-server.js",
+  "scripts": {
+    "prestart": "webpack",
+    "start": " nodemon app-server.js"
+  },
+  "author": "Roshan Budhathoki",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.5.2",
+    "express": "^4.17.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.0.0"
+  }
+}
