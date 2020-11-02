@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
-import Header from './parts/Header.js';
+import Header from './parts/Header.jsx';
 
 class App extends Component {
     state = { 
-        status: 'disconnected'
+        status: 'disconnected',
+        title: ''
     }
 
     componentWillMount() {
@@ -15,6 +16,9 @@ class App extends Component {
         this.socket.on('disconnect', () => {
             this.disconnect();
         });
+        this.socket.on('welcome', (title) => {
+            this.welcome(title);
+        });
     }
 
     connect() {
@@ -24,10 +28,14 @@ class App extends Component {
     disconnect() {
         this.setState({status: 'disconnected'});
     }
+
+    welcome(serverState) {
+        this.setState({ title: serverState.title });
+    }
     render() { 
-        return ( <div>
-            <Header title="New Header" status={this.state.status} />
-        </div> );
+        return (
+            <Header title={this.state.title} status={this.state.status} />
+        );
     }
 }
  
