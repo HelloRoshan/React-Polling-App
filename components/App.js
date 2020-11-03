@@ -5,6 +5,7 @@ import Header from './parts/Header.jsx';
 import Audience from './Audience.jsx';
 import Board from './Board.jsx';
 import Speaker from './Speaker.jsx';
+import Error404Page from './Error404Page.jsx';
 
 class App extends Component {
     state = { 
@@ -43,7 +44,8 @@ class App extends Component {
                 <Switch>
                     <Route name="speaker" path="/speaker" render={() => (<Speaker {...this.state} /> )} />
                     <Route name="board" path="/board" render={() => (<Board {...this.state} /> )} />
-                    <Route render={() => ( <Audience {...this.state}/>)} />
+                    <Route name="audience" path="/" exact render={() => ( <Audience {...this.state}/>)} />
+                    <Route  component={Error404Page} />
                 </Switch>
             </Router>
         );
