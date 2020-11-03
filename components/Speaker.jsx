@@ -3,7 +3,7 @@ class Speaker extends Component {
     state = {  }
     render() { 
         return ( 
-            <h1>Speaker</h1>
+            <h1>Speaker: {this.props.status}</h1>
          );
     }
 }

@@ -3,7 +3,7 @@ class Board extends Component {
     state = {  }
     render() { 
         return ( 
-            <h1>Board</h1>
+            <h1>Board: {this.props.title}</h1>
          );
     }
 }

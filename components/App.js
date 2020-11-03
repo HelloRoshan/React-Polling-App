@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import io from 'socket.io-client';
 import Header from './parts/Header.jsx';
+import Audience from './Audience.jsx';
+import Board from './Board.jsx';
+import Speaker from './Speaker.jsx';
 
 class App extends Component {
     state = { 
@@ -34,7 +38,14 @@ class App extends Component {
     }
     render() { 
         return (
-            <Header title={this.state.title} status={this.state.status} />
+            <Router>
+                <Header title={this.state.title} status={this.state.status} />
+                <Switch>
+                    <Route name="speaker" path="/speaker" render={() => (<Speaker {...this.state} /> )} />
+                    <Route name="board" path="/board" render={() => (<Board {...this.state} /> )} />
+                    <Route render={() => ( <Audience {...this.state}/>)} />
+                </Switch>
+            </Router>
         );
     }
 }
