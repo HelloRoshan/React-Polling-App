@@ -10,7 +10,9 @@ import Error404Page from './Error404Page.jsx';
 class App extends Component {
     state = { 
         status: 'disconnected',
-        title: ''
+        title: '',
+        member: {},
+        audience: []
     }
 
     componentWillMount() {
@@ -24,6 +26,16 @@ class App extends Component {
         this.socket.on('welcome', (title) => {
             this.welcome(title);
         });
+        this.socket.on('joined', (member) => {
+            this.joined(member);
+        });
+        this.socket.on('audience', (audience) => {
+            this.updateAudience(audience);
+        })
+    }
+
+    emit = (eventName, payload) => {
+        this.socket.emit(eventName, payload);
     }
 
     connect() {
@@ -37,6 +49,14 @@ class App extends Component {
     welcome(serverState) {
         this.setState({ title: serverState.title });
     }
+
+    joined(member) {
+        this.setState({ member });
+    }
+
+    updateAudience(newAudience) {
+        this.setState({ audience: newAudience })
+    }
     render() { 
         return (
             <Router>
@@ -44,7 +64,7 @@ class App extends Component {
                 <Switch>
                     <Route name="speaker" path="/speaker" render={() => (<Speaker {...this.state} /> )} />
                     <Route name="board" path="/board" render={() => (<Board {...this.state} /> )} />
-                    <Route name="audience" path="/" exact render={() => ( <Audience {...this.state}/>)} />
+                    <Route name="audience" path="/" exact render={() => ( <Audience {...this.state} emit={this.emit}/>)} />
                     <Route  component={Error404Page} />
                 </Switch>
             </Router>
